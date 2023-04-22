@@ -27,6 +27,9 @@ mongoose.connect(process.env.MONGODB_URI, {
 
 // Add routes here
 app.use(express.json());
+const userRoutes = require('./routes/users');
+const propertyRoutes = require('./routes/properties');
+const inquiryRoutes = require('./routes/inquiries');
 
 // Use the routes as middleware
 app.use('/api/users', userRoutes);
