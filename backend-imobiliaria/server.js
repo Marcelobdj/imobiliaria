@@ -29,9 +29,9 @@ mongoose.connect(process.env.MONGODB_URI, {
 app.use(express.json());
 
 // Use the routes as middleware
-app.use('/api/users', users);
-app.use('/api/properties', propertys);
-app.use('/api/inquiries', inquiries);
+app.use('/api/users', userRoutes);
+app.use('/api/properties', propertyRoutes);
+app.use('/api/inquiries', inquiryRoutes);
 
 
 // Start the server
