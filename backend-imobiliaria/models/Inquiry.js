@@ -4,21 +4,21 @@ const InquirySchema = new mongoose.Schema({
     propertyId: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Property',
-        required: true
+        required: true,
     },
     userId: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User',
-        required: true
+        required: true,
     },
     message: {
         type: String,
-        required: true
+        required: true,
     },
     createdAt: {
         type: Date,
-        default: Date.now
-    }
+        default: Date.now,
+    },
 });
 
 module.exports = mongoose.model('Inquiry', InquirySchema);

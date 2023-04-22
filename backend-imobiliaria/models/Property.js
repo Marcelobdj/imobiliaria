@@ -1,33 +1,56 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
 
-const PropertySchema = new mongoose.Schema(
-    {
-        title: String,
-        description: String,
-        propertyType: String,
-        transactionType: String,
-        price: Number,
-        location: {
-            city: String,
-            state: String,
-            country: String,
-            zipCode: String,
-            address: String
+const PropertySchema = new mongoose.Schema({
+    title: {
+        type: String,
+        required: true,
+    },
+    description: {
+        type: String,
+        required: true,
+    },
+    propertyType: {
+        type: String,
+        enum: ['house', 'land', 'business'],
+        required: true,
+    },
+    transactionType: {
+        type: String,
+        enum: ['sale', 'rent'],
+        required: true,
+    },
+    price: {
+        type: Number,
+        required: true,
+    },
+    location: {
+        type: String,
+        required: true,
+    },
+    features: {
+        type: Object,
+    },
+    images: [
+        {
+            type: String,
         },
-        features: {
-            bedrooms: Number,
-            bathrooms: Number,
-            area: Number
-        },
-        images: [String],
-        createdBy: {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: "User"
-        },
-        createdAt: Date,
-        updatedAt: Date,
-        isFeatured: Boolean
-    }
-);
+    ],
+    createdBy: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User',
+        required: true,
+    },
+    createdAt: {
+        type: Date,
+        default: Date.now,
+    },
+    updatedAt: {
+        type: Date,
+    },
+    isFeatured: {
+        type: Boolean,
+        default: false,
+    },
+});
 
-module.exports = mongoose.model("Property", PropertySchema);
+module.exports = mongoose.model('Property', PropertySchema);

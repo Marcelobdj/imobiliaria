@@ -1,27 +1,33 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
 
-const UserSchema = new mongoose.Schema(
-    {
-        name: String,
-        email: String,
-        password: String,
-        role: String,
-        favorites: [
-            {
-                type: mongoose.Schema.Types.ObjectId,
-                ref: "Property"
-            }
-        ],
-        emailAlerts: {
-            propertyType: [String],
-            transactionType: [String],
-            minPrice: Number,
-            maxPrice: Number,
-            location: [String]
+const UserSchema = new mongoose.Schema({
+    name: {
+        type: String,
+        required: true,
+    },
+    email: {
+        type: String,
+        required: true,
+        unique: true,
+    },
+    password: {
+        type: String,
+        required: true,
+    },
+    role: {
+        type: String,
+        enum: ['guest', 'registered', 'agent', 'admin'],
+        default: 'guest',
+    },
+    favorites: [
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'Property',
         },
-        createdAt: Date,
-        updatedAt: Date
-    }
-);
+    ],
+    emailAlerts: {
+        type: Object,
+    },
+});
 
-module.exports = mongoose.model("User", UserSchema);
+module.exports = mongoose.model('User', UserSchema);
